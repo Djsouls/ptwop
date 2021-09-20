@@ -11,7 +11,7 @@ from chat import Chat
 from debug import client_debug, server_debug, debug
 
 
-# This, obviously will be parameterized later on
+# This, obviously, will be parameterized later on
 HOST = '127.0.0.1'
 
 
