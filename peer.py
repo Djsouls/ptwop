@@ -17,6 +17,7 @@ def debug(msg):
     if DEBUG:
         print(f'<{threading.currentThread().getName()}> -- {msg}')
 
+
 class Peer:
     def __init__(self, backlog: int = 5):
         self.shutdown: bool = False
@@ -83,7 +84,7 @@ class Peer:
             self.shutdown = True
 
 
-    def begin_chat(self, conn):
+    def begin_chat(self, conn: socket):
         debug(f'Beginning chat with {conn.getpeername()}')
 
         chat_thread = threading.Thread(target=self.recvmsg, args=[conn])
@@ -108,7 +109,7 @@ class Peer:
         conn.close()
 
 
-    def recvmsg(self, conn):
+    def recvmsg(self, conn: socket):
         while self.continue_chat:
             msg = conn.recv(1024).decode(ENCODING)
 
@@ -118,7 +119,7 @@ class Peer:
                 self.end_chat(conn)
 
 
-    def end_chat(self, conn):
+    def end_chat(self, conn: socket):
         debug(f'Ending chat with: {conn.getpeername()}')
 
         self.continue_chat = False
